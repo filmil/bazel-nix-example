@@ -17,11 +17,36 @@ This repo fixes that issue.
 
 ## How to use
 
-Clone the repository. Install `bazel`. Then do the following:
+### Prerequisites 
+
+At the moment the only supported platform is `x86_64` under `Linux`.
+
+#### Install `bazel`
+
+I prefer downloading a [bazelisk][bzl] binary, and setting it somewhere in your
+`$PATH` under the name `bazel`.
+
+[bzl]: https://github.com/bazelbuild/bazelisk
+
+#### Clone the repository.
+
+```
+git clone https://github.com/filmil/bazel-nix-example --recurse-submodules
+```
+
+Sorry about the "submodules" bit. This was the only way I could take in
+the required `//tools` scripts.
+
+### Build
 
 ```
 bazel build //:hello
 ```
+
+The first run will take its sweet time to install a local copy of `nix` into your
+bazel cache.  Subsequent runs will take significantly less time.
+
+### Results
 
 This will produce a file `bazel-bin/hello.txt`, which contains some text
 produced by running a hermetic instance of [GNU Hello][gnuh].  You can take
