@@ -1,0 +1,13 @@
+genrule(
+    name = "hello",
+    srcs = [],
+    outs = [ "hello.txt" ],
+    tools = [
+        # This is declared in WORKSPACE as `nixpkgs_package(name="hello)`.
+        "@hello//:hello_bin",
+    ],
+    cmd = """
+        $(location @hello//:hello_bin) > $@
+        echo "Generated from GNU Hello and bazel"  >> $@
+    """
+)
